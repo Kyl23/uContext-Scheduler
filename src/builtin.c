@@ -8,6 +8,9 @@
 #include <fcntl.h>
 #include "../include/builtin.h"
 #include "../include/command.h"
+#include "../include/function.h"
+#include "../include/task.h"
+#include "../include/list.h"
 
 int help(char **args)
 {
@@ -161,25 +164,71 @@ int mypid(char **args)
 
 int add(char **args)
 {
+	Task t;
+
+	char *name = args[1];
+	char *func_name = args[2];
 	
+	task_init(&t, func_name);
+
+	strcpy(t.name, name);
+
+	if(task_algorithm == 2){
+		t.priority = atoi(args[3]);
+	}
+	
+	list_push(Task_List, &t);
+	
+	printf("Task %s  is ready.\n", name);
+
 	return 1;
 }
 
 int del(char **args)
 {
+	char *task_name = args[1];
+
+	for(List *i = Task_List->next; i != NULL; i = i->next){
+		Task *task = (Task *) i->value;
+		if(!strcmp(task->name, task_name)){
+			task->state = 3;
+		}
+	}
+
+	printf("Task %s is killed.\n", task_name);
 	
 	return 1;
 }
 
 int ps(char **args)
 {
-	
+	printf("%4s|%11s|%11s|%8s|%8s|%11s|%10s|%10s\n", "TID", "name", "state", "running", "waiting", "turnaround", "resources", "priority");
+	for(int i = 0; i < 80; i++) putc('-', stdout);
+	puts("");
+	for(List *i = Task_List->next; i != NULL; i = i->next){
+		Task *task = (Task *)i->value;
+		if(task->turnaround)
+			printf("%4d|%11s|%11s|%8d|%8d|%11d|", task->TID, task->name, state_mapper[task->state], task->running, task->waiting, task->turnaround);
+		else
+			printf("%4d|%11s|%11s|%8d|%8d|%11s|", task->TID, task->name, state_mapper[task->state], task->running, task->waiting, "none");
+		char resource_str[1024] = {'\0'};
+		int resource_count = 0;
+		for(int i = 0; i < 8; i++){
+			if(resource_str[i]){
+				sprintf(resource_str,"%s %d",resource_str, i);
+				resource_count++;
+			} 
+		}
+		if(!resource_count) strcpy(resource_str, "none");
+		printf("%10s|%10d\n", resource_str, task->priority);
+	}
 	return 1;
 }
 
 int start(char **args)
 {
-	
+	printf("Start simulation.\n");
+	task_scheduler();
 	return 1;
 }
 

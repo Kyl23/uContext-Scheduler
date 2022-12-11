@@ -8,6 +8,8 @@
 #include <fcntl.h>
 #include "../include/command.h"
 #include "../include/builtin.h"
+#include "../include/task.h"
+#include "../include/list.h"
 
 int execute(struct pipes *p)
 {
@@ -78,8 +80,34 @@ int fork_pipes(struct cmd *cmd)
 	return 1;
 }
 
+List *Task_List = NULL;
+List *Task_List_p = NULL;
+Task *Task_Now = NULL;
+
+int now_TID = 1;
+
+void copyTask(void *t, void *v){
+	Task *t_task = (Task *)t;
+	Task *v_task = (Task *)v;
+
+	memcpy(t_task, v_task, sizeof(Task));
+}
+
+void freeTask(void *t){
+	Task *task = (Task *)t;
+	free(task);
+
+	return;
+}
+
 void shell()
 {
+	Task_List = spawn_list(sizeof(Task), &copyTask, &freeTask);
+	Task_List_p = Task_List;
+
+	Task *task = (Task *)Task_List->value;
+	getcontext(&(task->context));
+	
 	while (1) {
 		printf(">>> $ ");
 		
