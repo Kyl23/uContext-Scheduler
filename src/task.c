@@ -63,6 +63,15 @@ void FCFS(){
   if(!Task_Now){
     Task_List_p = Task_List_p->next;
     Task_Now = (Task *)Task_List_p->value;
+
+    while(Task_List_p && Task_Now->state != 0){
+      Task_List_p = Task_List_p->next;
+      Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
+    }
+
+    if(!Task_List_p || !Task_Now)
+      return;
+        
     Task_Now->state = 1;
     setcontext(&(Task_Now->context));
   }
@@ -71,8 +80,14 @@ void FCFS(){
     Task_List_p = Task_List_p->next;
     Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
 
+    while(Task_List_p && Task_Now->state != 0){
+      Task_List_p = Task_List_p->next;
+      Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
+    }
+
     if(!Task_List_p || !Task_Now)
       return;
+
     Task_Now->state = 1;
     setcontext(&(Task_Now->context));
   }
