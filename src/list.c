@@ -2,6 +2,7 @@
 
 List *spawn_list(long long value_size, void(*cpy_value_func)(void *target, void *value), void(*free_value_func)(void *value)){
 	List *list = (List *)malloc(sizeof(List));
+	list->next = NULL;
 	list->size_value = value_size;
     list->free_value_func = free_value_func;
     list->cpy_value_func = cpy_value_func;
@@ -37,6 +38,7 @@ void list_push(List *list, void *value){
 	i->next = malloc(sizeof(List));
 	i = i->next;
 	i->value = malloc(list->size_value);
+	i->next = NULL;
     list->cpy_value_func(i->value, value);
 }
 
