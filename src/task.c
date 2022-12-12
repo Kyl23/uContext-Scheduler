@@ -41,9 +41,9 @@ void task_init(Task *t, char *task_name){
       t->context.uc_stack.ss_flags = 0;
 
       t->usleep = 0;
-      t->waiting_resource = 0;
       for(int i = 0; i < 8; i++){
         t->resources[i] = 0;
+        t->waiting_resource[i] = 0;
       }
       makecontext(&t->context, task[i], 0);
       break;
@@ -144,7 +144,6 @@ int alive_task(){
 
 
   Task_Now = NULL;
-  Task_List_p = Task_List;
 
   Task *task = (Task *)Task_List->value;
   setcontext(&task->context);

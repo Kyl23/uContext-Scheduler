@@ -12,7 +12,7 @@ typedef struct task{
     int waiting;
     int turnaround;
     int resources[8];
-    int waiting_resource;
+    int waiting_resource[8];
 	int priority;
     ucontext_t context;
     int usleep;
@@ -28,7 +28,6 @@ extern int task_algorithm;
 extern char *state_mapper[];
 
 extern List *Task_List;
-extern List *Task_List_p;
 extern Task *Task_Now;
 
 #endif

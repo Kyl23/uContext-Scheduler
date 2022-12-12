@@ -81,7 +81,6 @@ int fork_pipes(struct cmd *cmd)
 }
 
 List *Task_List = NULL;
-List *Task_List_p = NULL;
 Task *Task_Now = NULL;
 
 int now_TID = 1;
@@ -103,7 +102,6 @@ void freeTask(void *t){
 void shell()
 {
 	Task_List = spawn_list(sizeof(Task), &copyTask, &freeTask);
-	Task_List_p = Task_List;
 
 	Task *task = (Task *)Task_List->value;
 	getcontext(&(task->context));
