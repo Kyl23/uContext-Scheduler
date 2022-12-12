@@ -12,6 +12,7 @@ typedef struct task{
     int waiting;
     int turnaround;
     int resources[8];
+    int waiting_resource;
 	int priority;
     ucontext_t context;
     int usleep;

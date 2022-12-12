@@ -7,15 +7,15 @@
 char *state_mapper[] = {"READY", "RUNNING", "WAITING", "TERMINATED"};
 
 void (*task[])() = {&task1, &task2, &task3, &task4, &task5, &task6, &task7, &task8, &task9, &test_exit, &test_sleep, &test_resource1, &test_resource2, &idle};
-char *task_name[] = {"task1", "task2", "task3", "task4", "task5", "task6", "task7", "task8", "task9", "test_exit", "test_sleep", "test_resource1", "test_resource2", "idle"};
+char *task_n[] = {"task1", "task2", "task3", "task4", "task5", "task6", "task7", "task8", "task9", "test_exit", "test_sleep", "test_resource1", "test_resource2", "idle"};
 int task_len = 15;
 
-void task_sleep(int ms)
+void task_sleep(int ms_10)
 {
   Task_Now->state = 2;
   printf("Task %s goes to sleep\n", Task_Now->name);
-  Task_Now->usleep = ms;
-  while(1);
+  Task_Now->usleep = ms_10 * 10;
+  while(Task_Now->usleep);
 }
 
 void task_exit()
@@ -26,70 +26,55 @@ void task_exit()
 }
 
 void task_init(Task *t, char *task_name){
-    for(int i = 0; i < task_len; i++){
-      if(!strcmp(&task_name[i], task_name)){
-        t->TID = now_TID++;
-        t->state = 0;
-        t->running = 0;
-        t->waiting = 0;
-        t->turnaround = 0;
-        t->priority = -1;
-        
-        getcontext(&t->context);
-        t->context.uc_stack.ss_sp = malloc(1024 * 128 * sizeof(char));
-        t->context.uc_stack.ss_size = 1024 * 128 * sizeof(char);
-        t->context.uc_stack.ss_flags = 0;
-
-        t->usleep = 0;
-
-        for(int i = 0; i < 8; i++){
-          t->resources[i] = 0;
+  for(int i = 0; i < task_len; i++){
+    if(!strcmp(task_n[i], task_name)){
+      t->TID = now_TID++;
+      t->state = 0;
+      t->running = 0;
+      t->waiting = 0;
+      t->turnaround = 0;
+      t->priority = -1;
       
-        makecontext(&t->context, task[i], 0);
-			  break;
+      getcontext(&t->context);
+      t->context.uc_stack.ss_sp = malloc(1024 * 128 * sizeof(char));
+      t->context.uc_stack.ss_size = 1024 * 128 * sizeof(char);
+      t->context.uc_stack.ss_flags = 0;
+
+      t->usleep = 0;
+      t->waiting_resource = 0;
+      for(int i = 0; i < 8; i++){
+        t->resources[i] = 0;
       }
-		}
-	} 
-}
+      makecontext(&t->context, task[i], 0);
+      break;
+    }
+  }
+} 
+
 
 struct itimerval timer_attr;
 int looping;
+int concat_task = 0;
+int idling = 0;
 
 void FCFS(){
-  if(Task_List_p == NULL){
-    return;
-  }
+  if(Task_Now)
+    getcontext(&Task_Now->context);
   
-  if(!Task_Now){
-    Task_List_p = Task_List_p->next;
-    Task_Now = (Task *)Task_List_p->value;
-
-    while(Task_List_p && Task_Now->state != 0){
-      Task_List_p = Task_List_p->next;
-      Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
+  if(!Task_Now || Task_Now->state != 1){
+    for(List *i = Task_List->next; i != NULL; i = i->next){
+      Task *task = (Task *)i->value;
+      if(task->state == 0){
+        task->state = 1;
+        Task_Now = task;
+        idling = 0;
+        setcontext(&task->context);
+      }
     }
-
-    if(!Task_List_p || !Task_Now)
-      return;
-        
-    Task_Now->state = 1;
-    setcontext(&(Task_Now->context));
-  }
-
-  if(Task_Now && Task_Now->state == 3){
-    Task_List_p = Task_List_p->next;
-    Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
-
-    while(Task_List_p && Task_Now->state != 0){
-      Task_List_p = Task_List_p->next;
-      Task_Now = Task_List_p ? (Task *)Task_List_p->value : NULL;
+    if(!idling){
+      puts("CPU idle.");
+      idling = 1;
     }
-
-    if(!Task_List_p || !Task_Now)
-      return;
-
-    Task_Now->state = 1;
-    setcontext(&(Task_Now->context));
   }
 }
 
@@ -98,13 +83,26 @@ void RR(){
 }
 
 void PP(){
-  printf("PP");
+  for(List *i = Task_List->next; i != NULL; i = i->next){
+    Task *task = (Task *)i->value;
+    if(Task_Now == NULL && task->state == 0) {
+      Task_Now = task;
+    }
+    
+    if(Task_Now && (Task_Now->priority > task->priority) && task->state == 0){
+      Task_Now = task;
+    }
+  }
 }
 
 void (*algorithm[])() = {FCFS, RR, PP};
 
 void stop_looping(int signo){
   looping = 0;
+  concat_task = 1;
+
+  Task *task = (Task *)Task_List->value;
+  swapcontext(&Task_Now->context, &task->context);
 }
 
 void work_time_cal(){
@@ -125,8 +123,10 @@ void sleep_redundance(){
     
     if(task->state == 2){
       task->usleep -= 10;
-      if(task->usleep == 0) 
+      if(task->usleep <= 0){
+        task->usleep = 0; 
         task->state = 0;
+      }  
     }
   }
 }
@@ -142,6 +142,10 @@ int alive_task(){
   stop_looping(0);
   printf("Simulation over.\n");
 
+
+  Task_Now = NULL;
+  Task_List_p = Task_List;
+
   Task *task = (Task *)Task_List->value;
   setcontext(&task->context);
   
@@ -153,7 +157,7 @@ void task_dispatch(int signo){
   sleep_redundance();
   if(!alive_task())
     return;
-
+  
   algorithm[task_algorithm]();
 }
 
@@ -170,5 +174,6 @@ void timer_init(){
 
 void task_scheduler(){
   looping = 1;
+  
   timer_init();
 }

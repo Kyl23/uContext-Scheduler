@@ -214,7 +214,7 @@ int ps(char **args)
 		char resource_str[1024] = {'\0'};
 		int resource_count = 0;
 		for(int i = 0; i < 8; i++){
-			if(resource_str[i]){
+			if(task->resources[i]){
 				sprintf(resource_str,"%s %d",resource_str, i);
 				resource_count++;
 			} 
