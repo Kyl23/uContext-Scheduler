@@ -102,11 +102,26 @@ void freeTask(void *t){
 void shell()
 {
 	Task_List = spawn_list(sizeof(Task), &copyTask, &freeTask);
-
-	Task *task = (Task *)Task_List->value;
-	getcontext(&(task->context));
+	
+	Task *task = (Task *) Task_List->value;
+	task->in = task->out = task->fd = -1;
+	
+	getcontext(&task->context);
 	
 	while (1) {
+		Task *task = (Task *)Task_List->value;
+		task->state = 0;
+
+		if (task->in != -1){
+			dup2(task->in, 0);
+			close(task->in);
+			task->in = -1;
+		}  
+		if (task->out != -1){
+			dup2(task->out, 1);
+			close(task->out);
+			task->out = -1;
+		}
 		printf(">>> $ ");
 		
 		char *buffer = read_line();
@@ -116,25 +131,28 @@ void shell()
 		struct cmd *cmd = split_line(buffer);
 		
 		int status = -1;
+		
+
 		if (!cmd->background && cmd->head->next == NULL) {
-			int fd, in = dup(0), out = dup(1);
+			task->in = dup(0), task->out = dup(1);
+
 			if (cmd->in_file) {
-                fd = open(cmd->in_file, O_RDONLY);
-                dup2(fd, 0);
-                close(fd);
+                task->fd = open(cmd->in_file, O_RDONLY);
+                dup2(task->fd, 0);
+                close(task->fd);
             }
 			if (cmd->out_file) {
-                fd = open(cmd->out_file, O_RDWR | O_CREAT, 0644);
-                dup2(fd, 1);
-                close(fd);
+                task->fd = open(cmd->out_file, O_RDWR | O_CREAT, 0644);
+                dup2(task->fd, 1);
+                close(task->fd);
 			}
 			for (int i = 0; i < num_builtins(); ++i)
 				if (strcmp(cmd->head->args[0], builtin_str[i]) == 0)
-    				status = (*builtin_func[i])(cmd->head->args);
-			if (cmd->in_file)  dup2(in, 0);
-			if (cmd->out_file) dup2(out, 1);
-			close(in);
-			close(out);
+					status = (*builtin_func[i])(cmd->head->args);
+			if (cmd->in_file)  dup2(task->in, 0);
+			if (cmd->out_file) dup2(task->out, 1);
+			close(task->in);
+			close(task->out);
 		}
 		if (status == -1)
 			status = fork_pipes(cmd);

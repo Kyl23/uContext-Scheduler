@@ -9,6 +9,8 @@ char *state_mapper[] = {"READY", "RUNNING", "WAITING", "TERMINATED"};
 void (*task[])() = {&task1, &task2, &task3, &task4, &task5, &task6, &task7, &task8, &task9, &test_exit, &test_sleep, &test_resource1, &test_resource2, &idle};
 char *task_n[] = {"task1", "task2", "task3", "task4", "task5", "task6", "task7", "task8", "task9", "test_exit", "test_sleep", "test_resource1", "test_resource2", "idle"};
 int task_len = 15;
+void stop_timer();
+void init_timer();
 
 void task_sleep(int ms_10)
 {
@@ -54,7 +56,6 @@ void task_init(Task *t, char *task_name){
 
 struct itimerval timer_attr;
 int looping;
-int concat_task = 0;
 int idling = 0;
 
 void FCFS(){
@@ -99,10 +100,11 @@ void (*algorithm[])() = {FCFS, RR, PP};
 
 void stop_looping(int signo){
   looping = 0;
-  concat_task = 1;
 
   Task *task = (Task *)Task_List->value;
-  swapcontext(&Task_Now->context, &task->context);
+  if(Task_Now){
+    swapcontext(&Task_Now->context, &task->context);
+  }
 }
 
 void work_time_cal(){
@@ -138,26 +140,27 @@ int alive_task(){
       return 1;
     }
   }
-  
-  stop_looping(0);
-  printf("Simulation over.\n");
-
-
-  Task_Now = NULL;
 
   Task *task = (Task *)Task_List->value;
-  setcontext(&task->context);
-  
+  task->state = 3;
+  printf("Simulation over.\n");
+
+  stop_timer();
+  stop_looping(0);
+
   return 0;
 }
 
 void task_dispatch(int signo){
   work_time_cal();
   sleep_redundance();
-  if(!alive_task())
-    return;
   
-  algorithm[task_algorithm]();
+  alive_task();
+
+  Task *task = (Task *)Task_List->value;
+
+  if(task->state != 3)
+    algorithm[task_algorithm]();
 }
 
 void timer_init(){
@@ -171,8 +174,18 @@ void timer_init(){
   while(looping);
 }
 
-void task_scheduler(){
+void stop_timer(){
+  signal(SIGVTALRM, NULL);
+  signal(SIGTSTP, NULL);
+  timer_attr.it_value.tv_sec = 0;
+  timer_attr.it_value.tv_usec = 0;
+  timer_attr.it_interval.tv_sec = 0;
+  timer_attr.it_interval.tv_usec = 0;
+  setitimer(ITIMER_VIRTUAL, &timer_attr, NULL);
+}
+
+void task_scheduler(){  
   looping = 1;
-  
+  Task_Now = NULL;
   timer_init();
 }

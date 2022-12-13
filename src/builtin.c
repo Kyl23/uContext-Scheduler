@@ -227,6 +227,11 @@ int ps(char **args)
 
 int start(char **args)
 {
+	Task *task = (Task *)Task_List->value;
+
+  	if(task->state == 3)
+		return 0;
+
 	printf("Start simulation.\n");
 	task_scheduler();
 	return 1;
