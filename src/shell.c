@@ -109,6 +109,7 @@ void shell()
 	getcontext(&task->context);
 	
 	while (1) {
+		fflush(stdout);
 		Task *task = (Task *)Task_List->value;
 		task->state = 0;
 
@@ -149,10 +150,14 @@ void shell()
 			for (int i = 0; i < num_builtins(); ++i)
 				if (strcmp(cmd->head->args[0], builtin_str[i]) == 0)
 					status = (*builtin_func[i])(cmd->head->args);
+
+			fflush(stdout);
 			if (cmd->in_file)  dup2(task->in, 0);
 			if (cmd->out_file) dup2(task->out, 1);
 			close(task->in);
 			close(task->out);
+			task->in = -1;
+			task->out = -1;
 		}
 		if (status == -1)
 			status = fork_pipes(cmd);
