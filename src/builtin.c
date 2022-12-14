@@ -207,7 +207,7 @@ int ps(char **args)
 	puts("");
 	for(List *i = Task_List->next; i != NULL; i = i->next){
 		Task *task = (Task *)i->value;
-		if(task->turnaround)
+		if(task->state == 3)
 			printf("%4d|%11s|%11s|%8d|%8d|%11d|", task->TID, task->name, state_mapper[task->state], task->running, task->waiting, task->turnaround);
 		else
 			printf("%4d|%11s|%11s|%8d|%8d|%11s|", task->TID, task->name, state_mapper[task->state], task->running, task->waiting, "none");

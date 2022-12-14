@@ -1,0 +1,82 @@
+a
+ab
+abc
+abcd
+abcde
+abcdef
+abcdefg
+abcdefgh
+abcdefghi
+abcdefghij
+abcdefghijk
+abcdefghijkl
+abcdefghijklm
+abcdefghijklmn
+abcdefghijklmno
+abcdefghijklmnop
+abcdefghijklmnopq
+abcdefghijklmnopqr
+abcdefghijklmnopqrs
+abcdefghijklmnopqrst
+abcdefghijklmnopqrstu
+abcdefghijklmnopqrstuv
+abcdefghijklmnopqrstuvw
+abcdefghijklmnopqrstuvwx
+abcdefghijklmnopqrstuvwxy
+abcdefghijklmnopqrstuvwxyz
+
+a
+.
+.
+.
+u terminated
+v resource 0
+v resource 1
+v resource 2
+v sleep
+w waiting
+x waiting
+y waiting
+z waiting
+cpu idle
+v release 0
+v release 1
+v release 2
+v terminated
+w resource 1
+w resource 4
+w sleep
+cpu idle
+w resource 5
+w sleep
+cpu idle
+w release 1
+w release 4
+w release 5
+w terminated
+x resource 2
+x resource 4
+x sleep
+y resource 1
+y resource 3
+y resource 6
+y sleep
+cpu idle
+x release 2
+x release 4
+x terminated
+z resource 0
+z resource 4
+z resource 7
+z sleep
+cpu idle
+y release 1
+y release 3
+y release 6
+y terminated
+cpu idle
+z release 0
+z release 4
+z release 7
+z terminated
+simulate over

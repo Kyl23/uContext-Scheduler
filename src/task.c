@@ -83,16 +83,56 @@ void RR(){
   printf("RR");
 }
 
+int PP_context_checked = 0;
 void PP(){
+  Task *temp;
+  if(Task_Now){
+    getcontext(&Task_Now->context);
+  }
+  
+  if(PP_context_checked) {
+    PP_context_checked = 0;
+    return;
+  }
+
+  temp = NULL;
+
+  int alive = 0;
+
   for(List *i = Task_List->next; i != NULL; i = i->next){
     Task *task = (Task *)i->value;
-    if(Task_Now == NULL && task->state == 0) {
-      Task_Now = task;
+    if(task->state != 3) alive = 1;
+
+    if(temp == NULL && (task->state == 0 || task->state == 1)){
+      temp = task;
     }
-    
-    if(Task_Now && (Task_Now->priority > task->priority) && task->state == 0){
-      Task_Now = task;
+
+    if(temp && (temp->priority >= task->priority) && (task->state == 0 || task->state == 1)){
+      // printf("%s %s %d %d\n", temp->name, task->name, temp->priority, task->priority);
+      temp = task;
     }
+  }
+  if(temp == Task_Now) {
+    PP_context_checked = 1;
+    return;
+  }
+  if(temp == NULL && alive ){
+    if(!idling){
+      puts("CPU idle.");
+      idling = 1;
+    }
+    return;
+  }
+
+  if(Task_Now && Task_Now->state == 1)
+    Task_Now->state = 0;
+ 
+  Task_Now = temp;
+  
+  if(Task_Now){
+    Task_Now->state = 1;
+    idling = 0;
+    setcontext(&Task_Now->context);
   }
 }
 

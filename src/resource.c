@@ -27,6 +27,7 @@ void waiting_resources(int count, int *resources){
 }
 
 void check_resources_require(){
+    // here got a bug
     int virtual_resources[8];
     for(int i = 0; i < 8; i++){
         virtual_resources[i] = core_resource[i];

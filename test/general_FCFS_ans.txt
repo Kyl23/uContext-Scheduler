@@ -1,0 +1,64 @@
+kkk
+
+aaa
+aaa bbb
+aaa bbb ccc
+aaa ccc
+aaa ccc ddd
+aaa ccc ddd eee
+aaa ccc ddd eee fff
+aaa ccc ddd eee fff ggg
+aaa ccc ddd eee fff ggg hhh
+aaa ccc ddd eee fff ggg hhh iii
+aaa ccc ddd eee fff ggg hhh
+aaa ccc ddd eee fff ggg
+ccc ddd eee fff ggg
+ddd eee fff ggg
+
+start simulation
+ddd terminated
+eee terminated
+fff terminated
+ggg terminated
+
+20: 
+zzz
+zzz yyy
+zzz yyy xxx
+zzz yyy xxx www
+zzz yyy xxx www vvv
+zzz yyy xxx www vvv uuu
+
+zzz terminated
+yyy sleep
+xxx terminated
+www sleep
+vvv terminated
+uuu sleep
+cpu idle
+yyy terminated
+cpu idle
+www terminated
+cpu idle
+uuu terminated
+
+29:
+mmm
+mmm nnn
+mmm nnn ooo
+
+mmm resource 1
+mmm resource 3
+mmm resource 7
+mmm sleep
+nnn waiting
+ooo terminated
+mmm release 1
+mmm release 3
+mmm release 7
+mmm terminated
+nnn resource 0
+nnn resource 3
+nnn release 0
+nnn release 3
+nnn terminated
