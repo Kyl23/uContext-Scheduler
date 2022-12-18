@@ -31,4 +31,5 @@ add nnn test_resource2 1
 add ooo task1 3
 echo
 start
+ps
 exit

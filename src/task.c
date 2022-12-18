@@ -23,7 +23,6 @@ void task_sleep(int ms_10)
 void task_exit()
 {
   Task_Now->state = 3;
-  Task_Now->turnaround = Task_Now->running + Task_Now->waiting;
   printf("Task %s has terminated\n", Task_Now->name);
 }
 
@@ -47,6 +46,9 @@ void task_init(Task *t, char *task_name){
         t->resources[i] = 0;
         t->waiting_resource[i] = 0;
       }
+
+      t->waiting_resource_flag = 0;
+      
       makecontext(&t->context, task[i], 0);
       break;
     }
@@ -79,8 +81,63 @@ void FCFS(){
   }
 }
 
+int RR_counter = 0;
+List *Task_List_p = NULL;
+
 void RR(){
-  printf("RR");
+  if(Task_Now){
+    getcontext(&Task_Now->context);
+  }
+
+  if(Task_List_p == NULL){
+    Task_List_p = Task_List;
+    RR_counter = 2;
+  }
+  
+  if(idling) RR_counter = 2;
+
+  RR_counter += 1;
+  if(RR_counter == 3 || (Task_Now && Task_Now->state != 1)){
+    RR_counter = 0;
+
+    if(Task_Now && Task_Now->state == 1) 
+      Task_Now->state = 0;
+
+    Task *temp = NULL;
+
+    for(List *i = Task_List_p->next; i != NULL; i = i->next){
+      Task *task = (Task *) i->value;
+      if(task->state == 0){
+        Task_List_p = i;
+        temp = task;
+        break;
+      }
+    }
+
+    if(!temp && Task_List != Task_List_p){
+      for(List *i = Task_List->next; i != Task_List_p->next; i = i->next){
+        Task *task = (Task *) i->value;
+        if(task->state == 0){
+          Task_List_p = i;
+          temp = task;
+          break;
+        }
+      }
+    }
+
+    if(!temp){
+      if(!idling){
+        puts("CPU idle.");
+        idling = 1;
+      }
+      return;
+    }
+
+    idling = 0;
+    Task_Now = temp;
+    Task_Now->state = 1;
+    setcontext(&Task_Now->context);
+  }
 }
 
 int PP_context_checked = 0;
@@ -152,7 +209,9 @@ void work_time_cal(){
     Task *task = (Task *)i->value;
     
     if(task->state == 1) task->running++;
-    else if(task->state == 2) task->waiting++;
+    else if(task->state == 0) task->waiting++;
+
+    if(task->state != 3) task->turnaround++;
   }
 }
 
@@ -163,7 +222,7 @@ void sleep_redundance(){
   for(List *i = Task_List->next; i != NULL; i = i->next){
     Task *task = (Task *)i->value;
     
-    if(task->state == 2){
+    if(task->state == 2 && !task->waiting_resource_flag){
       task->usleep -= 10;
       if(task->usleep <= 0){
         task->usleep = 0; 
@@ -193,6 +252,7 @@ int alive_task(){
 
 void task_dispatch(int signo){
   work_time_cal();
+  
   sleep_redundance();
   
   alive_task();

@@ -22,6 +22,8 @@ void waiting_resources(int count, int *resources){
     for(int i = 0; i < count; i++)
         Task_Now->waiting_resource[resources[i]] = 1;
 
+    Task_Now->waiting_resource_flag = 1;
+
     printf("Task %s is waiting resource\n", Task_Now->name);
     while(resource_available(count, resources));
 }
@@ -33,14 +35,110 @@ void check_resources_require(){
         virtual_resources[i] = core_resource[i];
     }
 
-    for(List *i = Task_List->next; i != NULL; i = i->next){
-        Task *task = (Task *)i->value;
-        if(task->state == 2){
+    if(task_algorithm == 0){
+        for(List *i = Task_List->next; i != NULL; i = i->next){
+            Task *task = (Task *)i->value;
+            if(task->state == 2 && task->waiting_resource_flag){
+                int is_not_legal = 0;
+                for(int i = 0; i < 8; i++){
+                    if(task->waiting_resource[i] && virtual_resources[i])
+                    {
+                        is_not_legal = 1;
+                        break;
+                    }
+                }
+
+                if(!is_not_legal){
+                    task->state = 0;
+                    task->usleep = 0;
+                    task->waiting_resource_flag = 0;
+                    for(int i = 0; i < 8; i++){
+                        virtual_resources[i] += task->waiting_resource[i];
+                        task->waiting_resource[i] = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    if(task_algorithm == 1){
+        List *mid = Task_List_p ? Task_List_p : Task_List->next;
+
+        for(List *i = mid->next; i != NULL; i = i->next){
+            Task *task = (Task *) i->value;
+            if(task->state == 2 && task->waiting_resource_flag){
+                int is_not_legal = 0;
+                for(int i = 0; i < 8; i++){
+                    if(task->waiting_resource[i] && virtual_resources[i])
+                    {
+                        is_not_legal = 1;
+                        break;
+                    }
+                }
+
+                if(!is_not_legal){
+                    task->state = 0;
+                    task->usleep = 0;
+                    task->waiting_resource_flag = 0;
+                    for(int i = 0; i < 8; i++){
+                        virtual_resources[i] += task->waiting_resource[i];
+                        task->waiting_resource[i] = 0;
+                    }
+                }
+            }
+        }
+
+        for(List *i = Task_List->next; i != mid; i = i->next){
+            Task *task = (Task *) i->value;
+            if(task->state == 2 && task->waiting_resource_flag){
+                int is_not_legal = 0;
+                for(int i = 0; i < 8; i++){
+                    if(task->waiting_resource[i] && virtual_resources[i])
+                    {
+                        is_not_legal = 1;
+                        break;
+                    }
+                }
+
+                if(!is_not_legal){
+                    task->state = 0;
+                    task->usleep = 0;
+                    task->waiting_resource_flag = 0;
+                    for(int i = 0; i < 8; i++){
+                        virtual_resources[i] += task->waiting_resource[i];
+                        task->waiting_resource[i] = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    if(task_algorithm == 2){
+        List *cat = Task_List->next;
+        Task *temp;
+
+        do
+        {
+            temp = NULL;
+            for(List *i = cat; i != NULL; i = i->next){
+                Task *task = (Task *)i->value;
+
+                if(temp == NULL && task->state == 2 && task->waiting_resource_flag){
+                    temp = task;
+                }
+
+                if(temp && (temp->priority >= task->priority) && task->state == 2 && task->waiting_resource_flag){
+                    temp = task;
+                }
+            }
+
+            if(!temp) continue;
+            
             int is_not_legal = 0;
             int applying_resource = 0;
             for(int i = 0; i < 8; i++){
-                applying_resource += task->waiting_resource[i];
-                if(task->waiting_resource[i] && virtual_resources[i])
+                applying_resource += temp->waiting_resource[i];
+                if(temp->waiting_resource[i] && virtual_resources[i])
                 {
                     is_not_legal = 1;
                     break;
@@ -48,14 +146,20 @@ void check_resources_require(){
             }
 
             if(!is_not_legal && applying_resource){
-                task->state = 0;
-                task->usleep = 0;
+                temp->state = 0;
+                temp->usleep = 0;
+                temp->waiting_resource_flag = 0;
                 for(int i = 0; i < 8; i++){
-                    virtual_resources[i] += task->waiting_resource[i];
-                    task->waiting_resource[i] = 0;
+                    virtual_resources[i] += temp->waiting_resource[i];
+                    temp->waiting_resource[i] = 0;
                 }
             }
-        }
+            cat = cat->next;
+        } while (temp);
+        
+        
+        // temp is the high priority task
+
     }
 }
 

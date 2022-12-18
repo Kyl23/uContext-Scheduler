@@ -18,8 +18,8 @@ Task ccc is killed.
 Start simulation.
 Task ddd has terminated
 Task fff has terminated
-Task eee has terminated
 Task ggg has terminated
+Task eee has terminated
 Simulation over.
 
 Task zzz  is ready.
@@ -74,7 +74,7 @@ Simulation over.
    5|        ddd| TERMINATED|       0|       1|          1|      none|        -1
    6|        eee| TERMINATED|      31|      34|         65|      none|        -1
    7|        fff| TERMINATED|       0|       5|          5|      none|        -1
-   8|        ggg| TERMINATED|      35|      35|         70|      none|        -1
+   8|        ggg| TERMINATED|      30|      34|         64|      none|        -1
    9|        hhh| TERMINATED|       0|       0|          0|      none|        -1
   10|        iii| TERMINATED|       0|       0|          0|      none|        -1
   11|        zzz| TERMINATED|       0|       2|          2|      none|        -1
@@ -85,4 +85,4 @@ Simulation over.
   16|        uuu| TERMINATED|       0|       7|         27|      none|        -1
   17|        mmm| TERMINATED|       0|       2|          7|      none|        -1
   18|        nnn| TERMINATED|       0|       4|          8|      none|        -1
-  19|        ooo| TERMINATED|      29|       6|         35|      none|        -1
+  19|        ooo| TERMINATED|      32|       6|         38|      none|        -1

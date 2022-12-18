@@ -11,6 +11,7 @@
 #include "../include/function.h"
 #include "../include/task.h"
 #include "../include/list.h"
+#include "../include/resource.h"
 
 int help(char **args)
 {
@@ -192,9 +193,18 @@ int del(char **args)
 		Task *task = (Task *) i->value;
 		if(!strcmp(task->name, task_name)){
 			task->state = 3;
+			task->usleep = 0;
+			task->waiting_resource_flag = 0;
+			for(int i = 0; i < 8; i++){
+				if(task->resources[i]) // release resource
+					core_resource[i] = 0;
+
+				task->resources[i] = 0;
+				task->waiting_resource[i] = 0;
+			}
 		}
 	}
-
+	check_resources_require();
 	printf("Task %s is killed.\n", task_name);
 	
 	return 1;

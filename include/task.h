@@ -13,6 +13,7 @@ typedef struct task{
     int turnaround;
     int resources[8];
     int waiting_resource[8];
+    int waiting_resource_flag;
 	int priority;
     ucontext_t context;
     int in,out,fd;
@@ -27,8 +28,10 @@ void task_scheduler();
 extern int now_TID;
 extern int task_algorithm;
 extern char *state_mapper[];
+extern int core_resource[8];
 
 extern List *Task_List;
+extern List *Task_List_p;
 extern Task *Task_Now;
 
 #endif

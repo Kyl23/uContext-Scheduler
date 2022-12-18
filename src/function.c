@@ -47,7 +47,6 @@ void task1()
     int *arr = (int *)malloc(len * sizeof(int));
     for (int i = 0; i < len; ++i)
         arr[i] = rand();
-        
     for (int i = 0; i < len; ++i) {
         for (int j = i; j < len; ++j) {
             if (arr[i] > arr[j]) {
@@ -57,7 +56,6 @@ void task1()
             }
         }
     }
-
     free(arr);
     task_exit();
     while (1);

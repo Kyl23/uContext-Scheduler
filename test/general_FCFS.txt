@@ -17,9 +17,9 @@ Task ccc is killed.
 
 Start simulation.
 Task ddd has terminated
-Task eee has terminated
 Task fff has terminated
 Task ggg has terminated
+Task eee has terminated
 Simulation over.
 
 Task zzz  is ready.
@@ -54,7 +54,6 @@ Task mmm gets resource 3
 Task mmm gets resource 7
 Task mmm goes to sleep
 Task nnn is waiting resource
-Task ooo has terminated
 Task mmm release resource 1
 Task mmm release resource 3
 Task mmm release resource 7
@@ -64,4 +63,26 @@ Task nnn gets resource 3
 Task nnn release resource 0
 Task nnn release resource 3
 Task nnn has terminated
+Task ooo has terminated
 Simulation over.
+ TID|       name|      state| running| waiting| turnaround| resources|  priority
+--------------------------------------------------------------------------------
+   1|        kkk| TERMINATED|       0|       0|          0|      none|        -1
+   2|        aaa| TERMINATED|       0|       0|          0|      none|        -1
+   3|        bbb| TERMINATED|       0|       0|          0|      none|        -1
+   4|        ccc| TERMINATED|       0|       0|          0|      none|        -1
+   5|        ddd| TERMINATED|       0|       1|          1|      none|        -1
+   6|        eee| TERMINATED|      39|      40|         79|      none|        -1
+   7|        fff| TERMINATED|       0|       5|          5|      none|        -1
+   8|        ggg| TERMINATED|      36|      40|         76|      none|        -1
+   9|        hhh| TERMINATED|       0|       0|          0|      none|        -1
+  10|        iii| TERMINATED|       0|       0|          0|      none|        -1
+  11|        zzz| TERMINATED|       0|       2|          2|      none|        -1
+  12|        yyy| TERMINATED|       0|       3|         23|      none|        -1
+  13|        xxx| TERMINATED|       0|       4|          4|      none|        -1
+  14|        www| TERMINATED|       0|       5|         25|      none|        -1
+  15|        vvv| TERMINATED|       0|       6|          6|      none|        -1
+  16|        uuu| TERMINATED|       0|       7|         27|      none|        -1
+  17|        mmm| TERMINATED|       0|       2|          7|      none|        -1
+  18|        nnn| TERMINATED|       0|       4|          8|      none|        -1
+  19|        ooo| TERMINATED|      44|       6|         50|      none|        -1

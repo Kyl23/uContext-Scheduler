@@ -24,31 +24,93 @@ Task www  is ready.
 Task xxx  is ready.
 Task yyy  is ready.
 Task zzz  is ready.
+Start simulation.
+Task vvv gets resource 0
+Task vvv gets resource 1
+Task vvv gets resource 2
+Task vvv goes to sleep
+Task aaa has terminated
+Task bbb has terminated
+Task ccc has terminated
+Task ddd has terminated
+Task eee has terminated
+Task fff has terminated
+Task ggg has terminated
+Task vvv release resource 0
+Task vvv release resource 1
+Task vvv release resource 2
+Task vvv has terminated
+Task hhh has terminated
+Task iii has terminated
+Task www gets resource 1
+Task www gets resource 4
+Task www goes to sleep
+Task jjj has terminated
+Task www gets resource 5
+Task www goes to sleep
+Task kkk has terminated
+Task lll has terminated
+Task mmm has terminated
+Task nnn has terminated
+Task www release resource 1
+Task www release resource 4
+Task www release resource 5
+Task www has terminated
+Task ooo has terminated
+Task ppp has terminated
+Task xxx gets resource 2
+Task xxx gets resource 4
+Task xxx goes to sleep
+Task yyy gets resource 1
+Task yyy gets resource 3
+Task yyy gets resource 6
+Task yyy goes to sleep
+Task qqq has terminated
+Task rrr has terminated
+Task xxx release resource 2
+Task xxx release resource 4
+Task xxx has terminated
+Task sss has terminated
+Task zzz gets resource 0
+Task zzz gets resource 4
+Task zzz gets resource 7
+Task zzz goes to sleep
+Task yyy release resource 1
+Task yyy release resource 3
+Task yyy release resource 6
+Task yyy has terminated
+Task zzz release resource 0
+Task zzz release resource 4
+Task zzz release resource 7
+Task zzz has terminated
+Task ttt has terminated
+Task uuu has terminated
+Simulation over.
  TID|       name|      state| running| waiting| turnaround| resources|  priority
 --------------------------------------------------------------------------------
-   1|        aaa| TERMINATED|       9|       0|          9|      none|         2
-   2|        bbb| TERMINATED|       7|       0|          7|      none|         3
-   3|        ccc| TERMINATED|       9|       0|          9|      none|         4
-   4|        ddd| TERMINATED|       5|       0|          5|      none|         5
-   5|        eee| TERMINATED|       8|       0|          8|      none|         6
-   6|        fff| TERMINATED|       9|       0|          9|      none|         7
-   7|        ggg| TERMINATED|       5|       0|          5|      none|         8
-   8|        hhh| TERMINATED|       8|       0|          8|      none|         9
-   9|        iii| TERMINATED|       7|       0|          7|      none|        10
-  10|        jjj| TERMINATED|       7|       0|          7|      none|        12
-  11|        kkk| TERMINATED|       9|       0|          9|      none|        13
-  12|        lll| TERMINATED|       4|       0|          4|      none|        14
-  13|        mmm| TERMINATED|       8|       0|          8|      none|        15
-  14|        nnn| TERMINATED|       6|       0|          6|      none|        16
-  15|        ooo| TERMINATED|       7|       0|          7|      none|        17
-  16|        ppp| TERMINATED|       9|       0|          9|      none|        18
-  17|        qqq| TERMINATED|       7|       0|          7|      none|        21
-  18|        rrr| TERMINATED|       4|       0|          4|      none|        22
-  19|        sss| TERMINATED|      23|       0|         23|      none|        23
-  20|        ttt| TERMINATED|      24|       0|         24|      none|        25
-  21|        uuu| TERMINATED|      35|       0|         35|      none|        26
-  22|        vvv| TERMINATED|       0|      70|         70|      none|         1
-  23|        www| TERMINATED|       0|      60|         60|      none|        11
-  24|        xxx| TERMINATED|       0|      60|         60|      none|        19
-  25|        yyy| TERMINATED|       0|      80|         80|      none|        20
-  26|        zzz| TERMINATED|       0|      60|         60|      none|        24
+   1|        aaa| TERMINATED|      11|       2|         13|      none|         2
+   2|        bbb| TERMINATED|      10|      15|         25|      none|         3
+   3|        ccc| TERMINATED|       5|      26|         31|      none|         4
+   4|        ddd| TERMINATED|       0|      33|         33|      none|         5
+   5|        eee| TERMINATED|       8|      34|         42|      none|         6
+   6|        fff| TERMINATED|       8|      43|         51|      none|         7
+   7|        ggg| TERMINATED|      10|      52|         62|      none|         8
+   8|        hhh| TERMINATED|      12|      65|         77|      none|         9
+   9|        iii| TERMINATED|      12|      78|         90|      none|        10
+  10|        jjj| TERMINATED|      10|      92|        102|      none|        12
+  11|        kkk| TERMINATED|      10|     105|        115|      none|        13
+  12|        lll| TERMINATED|      10|     116|        126|      none|        14
+  13|        mmm| TERMINATED|      12|     127|        139|      none|        15
+  14|        nnn| TERMINATED|      10|     140|        150|      none|        16
+  15|        ooo| TERMINATED|       8|     153|        161|      none|        17
+  16|        ppp| TERMINATED|       8|     162|        170|      none|        18
+  17|        qqq| TERMINATED|       6|     173|        179|      none|        21
+  18|        rrr| TERMINATED|       4|     180|        184|      none|        22
+  19|        sss| TERMINATED|      51|     187|        238|      none|        23
+  20|        ttt| TERMINATED|      58|     245|        303|      none|        25
+  21|        uuu| TERMINATED|      98|     304|        402|      none|        26
+  22|        vvv| TERMINATED|       0|       2|         72|      none|         1
+  23|        www| TERMINATED|       0|      92|        152|      none|        11
+  24|        xxx| TERMINATED|       0|     172|        232|      none|        19
+  25|        yyy| TERMINATED|       0|     172|        252|      none|        20
+  26|        zzz| TERMINATED|       0|     240|        280|      none|        24

@@ -24,7 +24,6 @@ add www task5 11
 add xxx task6 19
 add yyy task7 20
 add zzz task8 24
-start > out
-rm out
+start
 ps
 exit
