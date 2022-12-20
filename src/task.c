@@ -93,12 +93,11 @@ void RR(){
 
   if(Task_List_p == NULL){
     Task_List_p = Task_List;
-    RR_counter = 2;
+    RR_counter = 3;
   }
   
-  if(idling) RR_counter = 2;
+  if(idling) RR_counter = 3;
 
-  RR_counter += 1;
   if(RR_counter == 3 || (Task_Now && Task_Now->state != 1)){
     RR_counter = 0;
 
@@ -140,6 +139,9 @@ void RR(){
     Task_Now->state = 1;
     setcontext(&Task_Now->context);
   }
+
+
+  RR_counter += 1;
 }
 
 int PP_context_checked = 0;

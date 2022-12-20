@@ -69,17 +69,17 @@ Simulation over.
    3|        bbb| TERMINATED|       0|       0|          0|      none|         2
    4|        ccc| TERMINATED|       0|       0|          0|      none|         3
    5|        ddd| TERMINATED|       1|       2|          2|      none|         7
-   6|        eee| TERMINATED|      42|       3|         44|      none|         8
+   6|        eee| TERMINATED|      31|       3|         33|      none|         8
    7|        fff| TERMINATED|       1|       1|          1|      none|         6
-   8|        ggg| TERMINATED|      34|      46|         79|      none|         9
+   8|        ggg| TERMINATED|      37|      34|         70|      none|         9
    9|        hhh| TERMINATED|       0|       0|          0|      none|         4
   10|        iii| TERMINATED|       0|       0|          0|      none|         5
-  11|        zzz| TERMINATED|       1|       7|          7|      none|         6
-  12|        yyy| TERMINATED|       2|       6|         26|      none|         5
-  13|        xxx| TERMINATED|       1|       5|          5|      none|         4
-  14|        www| TERMINATED|       2|       4|         24|      none|         3
-  15|        vvv| TERMINATED|       1|       3|          3|      none|         2
-  16|        uuu| TERMINATED|       2|       2|         22|      none|         1
+  11|        zzz| TERMINATED|       1|       6|          6|      none|         6
+  12|        yyy| TERMINATED|       2|       5|         25|      none|         5
+  13|        xxx| TERMINATED|       1|       4|          4|      none|         4
+  14|        www| TERMINATED|       2|       3|         23|      none|         3
+  15|        vvv| TERMINATED|       1|       2|          2|      none|         2
+  16|        uuu| TERMINATED|       2|       1|         21|      none|         1
   17|        mmm| TERMINATED|       2|       4|          9|      none|         2
   18|        nnn| TERMINATED|       1|       2|          2|      none|         1
-  19|        ooo| TERMINATED|      30|       6|         35|      none|         3
+  19|        ooo| TERMINATED|      37|       6|         42|      none|         3

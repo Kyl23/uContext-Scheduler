@@ -25,6 +25,13 @@ Task xxx  is ready.
 Task yyy  is ready.
 Task zzz  is ready.
 Start simulation.
+Task ddd has terminated
+Task iii has terminated
+Task kkk has terminated
+Task lll has terminated
+Task mmm has terminated
+Task ooo has terminated
+Task qqq has terminated
 Task vvv gets resource 0
 Task vvv gets resource 1
 Task vvv gets resource 2
@@ -33,8 +40,16 @@ Task www is waiting resource
 Task xxx is waiting resource
 Task yyy is waiting resource
 Task zzz is waiting resource
-Task fff has terminated
+Task bbb has terminated
+Task ccc has terminated
+Task eee has terminated
+Task ggg has terminated
 Task hhh has terminated
+Task jjj has terminated
+Task nnn has terminated
+Task ppp has terminated
+Task aaa has terminated
+Task fff has terminated
 Task rrr has terminated
 Task vvv release resource 0
 Task vvv release resource 1
@@ -43,23 +58,10 @@ Task vvv has terminated
 Task www gets resource 1
 Task www gets resource 4
 Task www goes to sleep
-Task aaa has terminated
-Task bbb has terminated
-Task ccc has terminated
-Task ddd has terminated
-Task jjj has terminated
-Task lll has terminated
-Task mmm has terminated
-Task ppp has terminated
-Task qqq has terminated
 Task www gets resource 5
 Task www goes to sleep
-Task eee has terminated
-Task ggg has terminated
-Task iii has terminated
-Task kkk has terminated
-Task nnn has terminated
-Task ooo has terminated
+Task ttt has terminated
+Task sss has terminated
 Task www release resource 1
 Task www release resource 4
 Task www release resource 5
@@ -71,7 +73,8 @@ Task yyy gets resource 1
 Task yyy gets resource 3
 Task yyy gets resource 6
 Task yyy goes to sleep
-Task sss has terminated
+Task uuu has terminated
+CPU idle.
 Task xxx release resource 2
 Task xxx release resource 4
 Task xxx has terminated
@@ -79,12 +82,11 @@ Task zzz gets resource 0
 Task zzz gets resource 4
 Task zzz gets resource 7
 Task zzz goes to sleep
-Task ttt has terminated
+CPU idle.
 Task yyy release resource 1
 Task yyy release resource 3
 Task yyy release resource 6
 Task yyy has terminated
-Task uuu has terminated
 CPU idle.
 Task zzz release resource 0
 Task zzz release resource 4
@@ -93,29 +95,29 @@ Task zzz has terminated
 Simulation over.
  TID|       name|      state| running| waiting| turnaround| resources|  priority
 --------------------------------------------------------------------------------
-   1|        aaa| TERMINATED|       9|     148|        156|      none|        -1
-   2|        bbb| TERMINATED|       9|     150|        158|      none|        -1
-   3|        ccc| TERMINATED|       8|     152|        159|      none|        -1
-   4|        ddd| TERMINATED|       9|     153|        161|      none|        -1
-   5|        eee| TERMINATED|      11|     178|        188|      none|        -1
-   6|        fff| TERMINATED|       7|     116|        122|      none|        -1
-   7|        ggg| TERMINATED|      11|     180|        190|      none|        -1
-   8|        hhh| TERMINATED|       7|     120|        126|      none|        -1
-   9|        iii| TERMINATED|      11|     182|        192|      none|        -1
-  10|        jjj| TERMINATED|       8|     161|        168|      none|        -1
-  11|        kkk| TERMINATED|      11|     184|        194|      none|        -1
-  12|        lll| TERMINATED|       8|     164|        171|      none|        -1
-  13|        mmm| TERMINATED|       8|     165|        172|      none|        -1
-  14|        nnn| TERMINATED|      10|     186|        195|      none|        -1
-  15|        ooo| TERMINATED|      10|     187|        196|      none|        -1
-  16|        ppp| TERMINATED|       8|     170|        177|      none|        -1
-  17|        qqq| TERMINATED|       9|     171|        179|      none|        -1
-  18|        rrr| TERMINATED|       7|     140|        146|      none|        -1
-  19|        sss| TERMINATED|      39|     247|        285|      none|        -1
-  20|        ttt| TERMINATED|      41|     253|        293|      none|        -1
-  21|        uuu| TERMINATED|      61|     256|        316|      none|        -1
-  22|        vvv| TERMINATED|       2|      83|        153|      none|        -1
-  23|        www| TERMINATED|       3|      79|        227|      none|        -1
-  24|        xxx| TERMINATED|       2|      69|        290|      none|        -1
-  25|        yyy| TERMINATED|       2|      70|        310|      none|        -1
-  26|        zzz| TERMINATED|       2|      69|        331|      none|        -1
+   1|        aaa| TERMINATED|      10|     108|        117|      none|        -1
+   2|        bbb| TERMINATED|       6|      81|         86|      none|        -1
+   3|        ccc| TERMINATED|       5|      83|         87|      none|        -1
+   4|        ddd| TERMINATED|       3|      13|         15|      none|        -1
+   5|        eee| TERMINATED|       5|      84|         88|      none|        -1
+   6|        fff| TERMINATED|       8|     111|        118|      none|        -1
+   7|        ggg| TERMINATED|       5|      88|         92|      none|        -1
+   8|        hhh| TERMINATED|       6|      89|         94|      none|        -1
+   9|        iii| TERMINATED|       3|      32|         34|      none|        -1
+  10|        jjj| TERMINATED|       6|      91|         96|      none|        -1
+  11|        kkk| TERMINATED|       3|      39|         41|      none|        -1
+  12|        lll| TERMINATED|       1|      42|         42|      none|        -1
+  13|        mmm| TERMINATED|       2|      43|         44|      none|        -1
+  14|        nnn| TERMINATED|       7|      93|         99|      none|        -1
+  15|        ooo| TERMINATED|       4|      49|         52|      none|        -1
+  16|        ppp| TERMINATED|       7|      96|        102|      none|        -1
+  17|        qqq| TERMINATED|       4|      57|         60|      none|        -1
+  18|        rrr| TERMINATED|       9|     112|        120|      none|        -1
+  19|        sss| TERMINATED|      36|     167|        202|      none|        -1
+  20|        ttt| TERMINATED|      30|     162|        191|      none|        -1
+  21|        uuu| TERMINATED|      59|     172|        230|      none|        -1
+  22|        vvv| TERMINATED|       2|      78|        148|      none|        -1
+  23|        www| TERMINATED|       3|      88|        218|      none|        -1
+  24|        xxx| TERMINATED|       2|      80|        279|      none|        -1
+  25|        yyy| TERMINATED|       2|      82|        300|      none|        -1
+  26|        zzz| TERMINATED|       2|      82|        320|      none|        -1

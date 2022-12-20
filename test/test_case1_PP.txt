@@ -88,29 +88,29 @@ Task uuu has terminated
 Simulation over.
  TID|       name|      state| running| waiting| turnaround| resources|  priority
 --------------------------------------------------------------------------------
-   1|        aaa| TERMINATED|       9|       2|         10|      none|         2
-   2|        bbb| TERMINATED|      11|      11|         21|      none|         3
-   3|        ccc| TERMINATED|      10|      22|         31|      none|         4
-   4|        ddd| TERMINATED|      11|      33|         43|      none|         5
-   5|        eee| TERMINATED|      10|      44|         53|      none|         6
-   6|        fff| TERMINATED|       9|      55|         63|      none|         7
-   7|        ggg| TERMINATED|      11|      66|         76|      none|         8
-   8|        hhh| TERMINATED|      10|      77|         86|      none|         9
-   9|        iii| TERMINATED|      10|      88|         97|      none|        10
-  10|        jjj| TERMINATED|      12|     100|        111|      none|        12
-  11|        kkk| TERMINATED|      11|     115|        125|      none|        13
-  12|        lll| TERMINATED|      11|     126|        136|      none|        14
-  13|        mmm| TERMINATED|      11|     137|        147|      none|        15
-  14|        nnn| TERMINATED|       9|     148|        156|      none|        16
-  15|        ooo| TERMINATED|      12|     159|        170|      none|        17
-  16|        ppp| TERMINATED|      10|     172|        181|      none|        18
-  17|        qqq| TERMINATED|      11|     185|        195|      none|        21
-  18|        rrr| TERMINATED|      10|     196|        205|      none|        22
-  19|        sss| TERMINATED|      43|     209|        251|      none|        23
-  20|        ttt| TERMINATED|      44|     257|        300|      none|        25
-  21|        uuu| TERMINATED|      67|     302|        368|      none|        26
+   1|        aaa| TERMINATED|      10|       2|         11|      none|         2
+   2|        bbb| TERMINATED|      12|      13|         24|      none|         3
+   3|        ccc| TERMINATED|      11|      26|         36|      none|         4
+   4|        ddd| TERMINATED|      10|      37|         46|      none|         5
+   5|        eee| TERMINATED|       9|      48|         56|      none|         6
+   6|        fff| TERMINATED|       8|      57|         64|      none|         7
+   7|        ggg| TERMINATED|       7|      68|         74|      none|         8
+   8|        hhh| TERMINATED|      11|      75|         85|      none|         9
+   9|        iii| TERMINATED|      11|      86|         96|      none|        10
+  10|        jjj| TERMINATED|      10|      98|        107|      none|        12
+  11|        kkk| TERMINATED|      11|     111|        121|      none|        13
+  12|        lll| TERMINATED|      12|     122|        133|      none|        14
+  13|        mmm| TERMINATED|      12|     135|        146|      none|        15
+  14|        nnn| TERMINATED|       7|     148|        154|      none|        16
+  15|        ooo| TERMINATED|      12|     157|        168|      none|        17
+  16|        ppp| TERMINATED|      11|     170|        180|      none|        18
+  17|        qqq| TERMINATED|       7|     183|        189|      none|        21
+  18|        rrr| TERMINATED|       8|     190|        197|      none|        22
+  19|        sss| TERMINATED|      45|     201|        245|      none|        23
+  20|        ttt| TERMINATED|      53|     251|        303|      none|        25
+  21|        uuu| TERMINATED|      90|     304|        393|      none|        26
   22|        vvv| TERMINATED|       2|       1|         71|      none|         1
-  23|        www| TERMINATED|       3|     100|        160|      none|        11
-  24|        xxx| TERMINATED|       2|     184|        244|      none|        19
-  25|        yyy| TERMINATED|       2|     184|        264|      none|        20
-  26|        zzz| TERMINATED|       2|     252|        292|      none|        24
+  23|        www| TERMINATED|       3|      98|        158|      none|        11
+  24|        xxx| TERMINATED|       2|     182|        242|      none|        19
+  25|        yyy| TERMINATED|       2|     182|        262|      none|        20
+  26|        zzz| TERMINATED|       2|     246|        286|      none|        24
