@@ -290,6 +290,9 @@ void stop_timer(){
 
 void task_scheduler(){  
   looping = 1;
+
+  if(Task_Now && Task_Now->state == 1) Task_Now->state = 0;
+  
   Task_Now = NULL;
   timer_init();
 }
