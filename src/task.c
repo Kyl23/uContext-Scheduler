@@ -17,12 +17,14 @@ void task_sleep(int ms_10)
   Task_Now->state = 2;
   printf("Task %s goes to sleep\n", Task_Now->name);
   Task_Now->usleep = ms_10 * 10;
+  Task_Now->running++;
   while(Task_Now->usleep);
 }
 
 void task_exit()
 {
   Task_Now->state = 3;
+  Task_Now->running++;
   printf("Task %s has terminated\n", Task_Now->name);
 }
 

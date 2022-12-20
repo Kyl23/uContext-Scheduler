@@ -71,18 +71,18 @@ Simulation over.
    2|        aaa| TERMINATED|       0|       0|          0|      none|        -1
    3|        bbb| TERMINATED|       0|       0|          0|      none|        -1
    4|        ccc| TERMINATED|       0|       0|          0|      none|        -1
-   5|        ddd| TERMINATED|       0|       1|          1|      none|        -1
-   6|        eee| TERMINATED|      31|      34|         65|      none|        -1
-   7|        fff| TERMINATED|       0|       5|          5|      none|        -1
-   8|        ggg| TERMINATED|      30|      34|         64|      none|        -1
+   5|        ddd| TERMINATED|       1|       1|          1|      none|        -1
+   6|        eee| TERMINATED|      40|      42|         81|      none|        -1
+   7|        fff| TERMINATED|       1|       5|          5|      none|        -1
+   8|        ggg| TERMINATED|      39|      42|         80|      none|        -1
    9|        hhh| TERMINATED|       0|       0|          0|      none|        -1
   10|        iii| TERMINATED|       0|       0|          0|      none|        -1
-  11|        zzz| TERMINATED|       0|       2|          2|      none|        -1
-  12|        yyy| TERMINATED|       0|       3|         23|      none|        -1
-  13|        xxx| TERMINATED|       0|       4|          4|      none|        -1
-  14|        www| TERMINATED|       0|       5|         25|      none|        -1
-  15|        vvv| TERMINATED|       0|       6|          6|      none|        -1
-  16|        uuu| TERMINATED|       0|       7|         27|      none|        -1
-  17|        mmm| TERMINATED|       0|       2|          7|      none|        -1
-  18|        nnn| TERMINATED|       0|       4|          8|      none|        -1
-  19|        ooo| TERMINATED|      32|       6|         38|      none|        -1
+  11|        zzz| TERMINATED|       1|       2|          2|      none|        -1
+  12|        yyy| TERMINATED|       2|       3|         23|      none|        -1
+  13|        xxx| TERMINATED|       1|       4|          4|      none|        -1
+  14|        www| TERMINATED|       2|       5|         25|      none|        -1
+  15|        vvv| TERMINATED|       1|       6|          6|      none|        -1
+  16|        uuu| TERMINATED|       2|       7|         27|      none|        -1
+  17|        mmm| TERMINATED|       2|       2|          7|      none|        -1
+  18|        nnn| TERMINATED|       1|       4|          8|      none|        -1
+  19|        ooo| TERMINATED|      47|       6|         52|      none|        -1

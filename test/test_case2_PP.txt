@@ -56,8 +56,8 @@ Task ccc has terminated
 Simulation over.
  TID|       name|      state| running| waiting| turnaround| resources|  priority
 --------------------------------------------------------------------------------
-   1|        aaa| TERMINATED|       0|       2|         72|      none|         2
-   2|        ccc| TERMINATED|       0|       7|        260|      none|         5
-   3|        ddd| TERMINATED|       0|       8|        156|      none|         4
-   4|        eee| TERMINATED|       0|       5|        114|      none|         3
-   5|        fff| TERMINATED|       0|       3|        198|      none|         1
+   1|        aaa| TERMINATED|       2|       2|         72|      none|         2
+   2|        ccc| TERMINATED|       2|       7|        260|      none|         5
+   3|        ddd| TERMINATED|       2|       8|        156|      none|         4
+   4|        eee| TERMINATED|       2|       5|        114|      none|         3
+   5|        fff| TERMINATED|       3|       3|        198|      none|         1

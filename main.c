@@ -9,8 +9,7 @@ int task_algorithm; // 0: FCFS, 1: RR, 2: PP
 
 int main(int argc, char *argv[])
 {
-	// char *algo = argv[1];
-	char *algo = "RR";
+	char *algo = argv[1];
 
 	if(!strcmp("FCFS", algo)){
 		task_algorithm = 0;
