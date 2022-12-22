@@ -73,6 +73,7 @@ void FCFS(){
         task->state = 1;
         Task_Now = task;
         idling = 0;
+        printf("Task %s is running\n", Task_Now->name);
         setcontext(&task->context);
       }
     }
@@ -137,6 +138,7 @@ void RR(){
     idling = 0;
     Task_Now = temp;
     Task_Now->state = 1;
+    printf("Task %s is running\n", Task_Now->name);
     setcontext(&Task_Now->context);
   }
 
@@ -193,6 +195,7 @@ void PP(){
   if(Task_Now){
     Task_Now->state = 1;
     idling = 0;
+    printf("Task %s is running\n", Task_Now->name);
     setcontext(&Task_Now->context);
   }
 }
